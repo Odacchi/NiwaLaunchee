@@ -8,7 +8,7 @@ public class Main {
 	 * Start point
 	 * @param args
 	 */
-	public static void Main(String[] args) {
-
+	public static void main(String[] args) {
+		System.out.println("hi");
 	}
 }
