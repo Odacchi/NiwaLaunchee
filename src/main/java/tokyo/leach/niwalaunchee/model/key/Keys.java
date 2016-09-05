@@ -15,7 +15,7 @@ public class Keys {
 		keys = new HashSet<Key>();
 	}
 
-	public void addKey(tokyo.leach.niwalaunchee.model.key.Key key) {
+	public void addKey(Key key) {
 		keys.add(key);
 	}
 

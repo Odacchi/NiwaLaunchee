@@ -22,4 +22,9 @@ public class Key {
 	public boolean equals(Object keyB) {
 		return key.equals(((Key)keyB).getKey());
 	}
+
+	@Override
+	public int hashCode() {
+		return key.hashCode();
+	}
 }
