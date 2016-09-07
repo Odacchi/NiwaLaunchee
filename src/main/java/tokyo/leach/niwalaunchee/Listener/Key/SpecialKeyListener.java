@@ -2,25 +2,26 @@ package tokyo.leach.niwalaunchee.Listener.Key;
 
 import org.jnativehook.keyboard.NativeKeyEvent;
 import tokyo.leach.niwalaunchee.Helper.KeyHelper;
+import tokyo.leach.niwalaunchee.model.key.SpecialKeys;
 
 /**
  * Created by tomi on 2016/09/05.
  */
 public class SpecialKeyListener extends MultiKeyListener {
-	protected tokyo.leach.niwalaunchee.model.key.SpecialKeys keys = null;
+	protected SpecialKeys keys = null;
 	static Object lock = new Object();
 	SpecialKeyPressedSubject subject;
 
-	public SpecialKeyListener(tokyo.leach.niwalaunchee.model.key.SpecialKeys keys) {
+	public SpecialKeyListener(SpecialKeys keys) {
 		this.keys = keys;
 		this.subject = new SpecialKeyPressedSubject();
 	}
 
-	public tokyo.leach.niwalaunchee.model.key.SpecialKeys getKeys() {
+	public SpecialKeys getKeys() {
 		return keys;
 	}
 
-	public void setKeys(tokyo.leach.niwalaunchee.model.key.SpecialKeys keys) {
+	public void setKeys(SpecialKeys keys) {
 		/**
 		 * to prevent chang keys varialble during nativeKeyPressed function is processed.
 		 */
