@@ -3,8 +3,13 @@ package tokyo.leach.niwalaunchee.Application;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
+import tokyo.leach.niwalaunchee.Window.NiwaTaskTray;
+import tokyo.leach.niwalaunchee.Window.WindowManager;
 import tokyo.leach.niwalaunchee.model.key.Key;
 import tokyo.leach.niwalaunchee.model.key.SpecialKeys;
+
+import java.awt.*;
+import java.io.IOException;
 
 /**
  * Created by tomi on 2016/09/07.
@@ -13,14 +18,16 @@ import tokyo.leach.niwalaunchee.model.key.SpecialKeys;
 public class Application {
 	private SpecialKeys specialKeys;
 	private Injector injector;
-	private Application instance;
+	private static Application instance;
+	private WindowManager windowManager;
 
 	// FIXME tomi: this implementation is not so perfect for singleton class.
-	private Application() {
-		// do nothing (singleton)
+	private Application() throws IOException, AWTException {
+		windowManager = new WindowManager();
+		windowManager.setTaskTray(new NiwaTaskTray());
 	}
 
-	public Application get() {
+	public static Application get() throws IOException, AWTException {
 		if(instance == null) {
 			instance = new Application();
 		}
@@ -64,6 +71,7 @@ public class Application {
 	 * stop application
 	 */
 	public void stop() {
-
+		// TODO tomi: write finalize procedures here.
+		System.exit(0);
 	}
 }
