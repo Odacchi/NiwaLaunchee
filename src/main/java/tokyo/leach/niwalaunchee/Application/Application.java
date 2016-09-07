@@ -4,6 +4,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
 import tokyo.leach.niwalaunchee.Window.NiwaTaskTray;
+import tokyo.leach.niwalaunchee.Window.SearchWindow;
 import tokyo.leach.niwalaunchee.Window.WindowManager;
 import tokyo.leach.niwalaunchee.model.key.Key;
 import tokyo.leach.niwalaunchee.model.key.SpecialKeys;
@@ -24,6 +25,7 @@ public class Application {
 	// FIXME tomi: this implementation is not so perfect for singleton class.
 	private Application() throws IOException, AWTException {
 		windowManager = new WindowManager();
+		windowManager.setSearchWindow(new SearchWindow());
 		windowManager.setTaskTray(new NiwaTaskTray());
 	}
 
