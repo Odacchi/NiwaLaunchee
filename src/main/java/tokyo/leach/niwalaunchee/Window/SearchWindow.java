@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Created by tomi on 2016/09/07.
  */
-public class SearchWindow {
+public class SearchWindow implements IToggleable {
 	private JFrame frame;
 	private JTextField textField;
 
@@ -19,6 +19,10 @@ public class SearchWindow {
 		frame.getContentPane().add(BorderLayout.EAST, textField);
 		frame.pack();
 		frame.setLocationRelativeTo(null); // center of screen
-		frame.setVisible(true);
+	}
+
+	@Override
+	public void toggle() {
+		frame.setVisible(!frame.isVisible());
 	}
 }

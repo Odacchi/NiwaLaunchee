@@ -1,5 +1,6 @@
 package tokyo.leach.niwalaunchee.Window;
 
+import org.jnativehook.NativeHookException;
 import tokyo.leach.niwalaunchee.Application.Application;
 
 import javax.imageio.ImageIO;
@@ -40,9 +41,7 @@ public class NiwaTaskTray extends TaskTray {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Application.get().stop();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				} catch (AWTException e1) {
+				} catch (NativeHookException e1) {
 					e1.printStackTrace();
 				}
 			}
