@@ -39,7 +39,7 @@ public class SpecialKeyListener extends MultiKeyListener {
 	}
 
 	@Override
-	public synchronized void nativeKeyPressed(NativeKeyEvent e) {
+	public void nativeKeyPressed(NativeKeyEvent e) {
 		super.nativeKeyPressed(e);
 		synchronized (lock) {
 			if(KeyHelper.isSameKey(keys, pressed)) {

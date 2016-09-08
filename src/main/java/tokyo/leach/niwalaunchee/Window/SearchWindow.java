@@ -11,14 +11,19 @@ public class SearchWindow implements IToggleable {
 	private JTextField textField;
 
 	public SearchWindow() {
-		frame = new JFrame("SearchWindow");
-		frame.setLayout(new FlowLayout());
-		frame.setResizable(false);
-		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		textField = new JTextField(50);
-		frame.getContentPane().add(BorderLayout.EAST, textField);
-		frame.pack();
-		frame.setLocationRelativeTo(null); // center of screen
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				frame = new JFrame("SearchWindow");
+				frame.setLayout(new FlowLayout());
+				frame.setResizable(false);
+				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				textField = new JTextField(50);
+				frame.getContentPane().add(BorderLayout.EAST, textField);
+				frame.pack();
+				frame.setLocationRelativeTo(null); // center of screen
+			}
+		});
 	}
 
 	@Override

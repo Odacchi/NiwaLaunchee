@@ -36,7 +36,6 @@ public class MultiKeyListenerTest {
 		GlobalScreen.addNativeKeyListener(mkl);
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_CONTROL);
-		Thread.sleep(30);
 		robot.keyPress(KeyEvent.VK_SPACE);
 
 		Thread.sleep(300);

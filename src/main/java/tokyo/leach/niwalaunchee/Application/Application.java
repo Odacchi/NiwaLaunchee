@@ -17,6 +17,8 @@ import tokyo.leach.niwalaunchee.model.key.SpecialKeys;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by tomi on 2016/09/07.
@@ -90,7 +92,14 @@ public class Application {
 	 * start application
 	 */
 	public void start() throws NativeHookException {
+		GlobalScreen.addNativeKeyListener(spKeylistener);
 		GlobalScreen.registerNativeHook();
+
+		// Get the logger for "org.jnativehook" and set the level to warning.
+		Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+		logger.setLevel(Level.WARNING);
+		// Don't forget to disable the parent handlers.
+		logger.setUseParentHandlers(false);
 	}
 
 	/**
@@ -98,6 +107,7 @@ public class Application {
 	 */
 	public void stop() throws NativeHookException {
 		// TODO tomi: write finalize procedures here.
+		GlobalScreen.removeNativeKeyListener(spKeylistener);
 		GlobalScreen.unregisterNativeHook();
 		System.exit(0);
 	}

@@ -21,26 +21,27 @@ public class MultiKeyListener extends GlobalKeyListener {
 	protected tokyo.leach.niwalaunchee.model.key.Keys pressed = new tokyo.leach.niwalaunchee.model.key.Keys();
 
 	@Override
-	public synchronized void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
+	public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
 		pressed.addKey(new Key((char) nativeKeyEvent.getKeyCode()));
 		System.out.println(nativeKeyEvent.paramString());
 		System.out.println(nativeKeyEvent.getKeyChar());
 		System.out.println("modifier: " + nativeKeyEvent.getModifiers());
-		if((nativeKeyEvent.getModifiers() & NativeKeyEvent.CTRL_MASK) != 0) {
+		if((nativeKeyEvent.getModifiers() & NativeKeyEvent.CTRL_L_MASK) != 0) {
 			System.out.println("ctrl!");
 		}
+		System.out.println(String.format("pressed num: %d", pressed.getKeys().size()));
 	}
 
 	@Override
-	public synchronized void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) {
+	public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) {
 		pressed.removeKey(new Key((char) nativeKeyEvent.getKeyCode()));
 	}
 
 	@Override
 	public void nativeKeyTyped(NativeKeyEvent nativeKeyEvent) {
 		// DO NOTHING
-		System.out.println("typed: "+ nativeKeyEvent.paramString());
-		System.out.println("modifier: " + nativeKeyEvent.getModifiers());
+		System.out.println("nktyped" + nativeKeyEvent.paramString());
+		System.out.println("nktyped" + nativeKeyEvent.getKeyChar());
 	}
 
 	public Keys getPressed() {

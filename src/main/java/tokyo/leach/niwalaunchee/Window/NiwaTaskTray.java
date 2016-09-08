@@ -25,7 +25,6 @@ public class NiwaTaskTray extends TaskTray {
 		icon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 			}
 		});
 		return icon;
