@@ -1,8 +1,5 @@
 package tokyo.leach.niwalaunchee.Window;
 
-import com.sun.javafx.tk.Toolkit;
-import com.sun.javafx.tools.ant.Info;
-
 import java.awt.*;
 import java.io.IOException;
 
