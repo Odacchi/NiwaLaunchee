@@ -8,7 +8,7 @@ import tokyo.leach.niwalaunchee.Window.WindowManager;
 public class SpecialKeyPressedObserver implements ISpecialKeyPressedListener {
 	private WindowManager windowManager;
 	public SpecialKeyPressedObserver(WindowManager winManager) {
-		this.windowManager = windowManager;
+		windowManager = winManager;
 	}
 	@Override
 	public void specialKeyPressed() {
