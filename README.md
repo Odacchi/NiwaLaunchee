@@ -1,4 +1,4 @@
-# NiwaLaunchee
+# NiwaLaunchee [![Build Status](https://travis-ci.org/niwatolli3/NiwaLaunchee.svg?branch=master)](https://travis-ci.org/niwatolli3/NiwaLaunchee)
 Application Launcher
 
 # How to contribute
