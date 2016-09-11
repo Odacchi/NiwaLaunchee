@@ -8,6 +8,7 @@ import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import tokyo.leach.niwalaunchee.Listener.Key.SpecialKeyListener;
 import tokyo.leach.niwalaunchee.Listener.Key.SpecialKeyPressedObserver;
+import tokyo.leach.niwalaunchee.System.NiwaSystem;
 import tokyo.leach.niwalaunchee.Window.NiwaTaskTray;
 import tokyo.leach.niwalaunchee.Window.SearchWindow;
 import tokyo.leach.niwalaunchee.Window.WindowManager;
@@ -25,12 +26,9 @@ import java.util.logging.Logger;
  */
 //@Singleton
 public class Application {
-	private SpecialKeyListener spKeylistener;
-	private SpecialKeyPressedObserver spKeyObserver;
-	private SpecialKeys specialKeys;
 	private Injector injector;
 	private static Application instance;
-	private WindowManager windowManager;
+	private static NiwaSystem system;
 
 	// FIXME tomi: this implementation is not so perfect for singleton class.
 	private Application() {
@@ -41,27 +39,9 @@ public class Application {
 	public static Application get() {
 		if(instance == null) {
 			instance = new Application();
+			system = new NiwaSystem();
 		}
 		return instance;
-	}
-
-	public SpecialKeys getSpecialKeys() {
-		return specialKeys;
-	}
-
-	public void setSpecialKeys(SpecialKeys specialKeys) {
-		this.specialKeys = specialKeys;
-	}
-
-	public void resetSpecialKeys() {
-		specialKeys = new SpecialKeys();
-	}
-
-	public void setSpecialKeysFromKey(Key... keys) {
-		specialKeys = new SpecialKeys();
-		for(Key key : keys) {
-			specialKeys.addKey(key);
-		}
 	}
 
 	/**
@@ -69,37 +49,15 @@ public class Application {
 	 */
 	public void init() throws IOException, AWTException {
 		injector = Guice.createInjector(new AppInjector());
-		windowManager = new WindowManager();
-		windowManager.setSearchWindow(new SearchWindow());
-		windowManager.setTaskTray(new NiwaTaskTray());
-		setDefaultSpecialKeys();
-		spKeylistener = new SpecialKeyListener(specialKeys);
-		spKeyObserver = new SpecialKeyPressedObserver(windowManager);
-		spKeylistener.addObserver(spKeyObserver);
-	}
-
-	/**
-	 * Left Control + Space is a default special key
-	 */
-	public void setDefaultSpecialKeys() {
-		SpecialKeys keys = new SpecialKeys();
-		keys.addKey(new Key((char) NativeKeyEvent.VC_CONTROL_L));
-		keys.addKey(new Key((char) NativeKeyEvent.VC_SPACE));
-		this.setSpecialKeys(keys);
+		system = new NiwaSystem();
+		system.init();
 	}
 
 	/**
 	 * start application
 	 */
 	public void start() throws NativeHookException {
-		GlobalScreen.addNativeKeyListener(spKeylistener);
-		GlobalScreen.registerNativeHook();
-
-		// Get the logger for "org.jnativehook" and set the level to warning.
-		Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
-		logger.setLevel(Level.WARNING);
-		// Don't forget to disable the parent handlers.
-		logger.setUseParentHandlers(false);
+		system.keyListenStart();
 	}
 
 	/**
@@ -107,8 +65,7 @@ public class Application {
 	 */
 	public void stop() throws NativeHookException {
 		// TODO tomi: write finalize procedures here.
-		GlobalScreen.removeNativeKeyListener(spKeylistener);
-		GlobalScreen.unregisterNativeHook();
+		system.keyListenStop();
 		System.exit(0);
 	}
 }
