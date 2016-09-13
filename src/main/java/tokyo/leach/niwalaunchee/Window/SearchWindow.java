@@ -1,5 +1,9 @@
 package tokyo.leach.niwalaunchee.Window;
 
+import tokyo.leach.niwalaunchee.Command.CommandExecutor;
+import tokyo.leach.niwalaunchee.Command.CommandFinder;
+import tokyo.leach.niwalaunchee.Component.CommandJTextField;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,9 +12,11 @@ import java.awt.*;
  */
 public class SearchWindow implements IToggleable {
 	private JFrame frame;
-	private JTextField textField;
+	private CommandJTextField textField;
 
-	public SearchWindow() {
+	private SearchWindow() {}
+
+	public SearchWindow(final String commandSplitter) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -18,7 +24,15 @@ public class SearchWindow implements IToggleable {
 				frame.setLayout(new FlowLayout());
 				frame.setResizable(false);
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-				textField = new JTextField(50);
+				textField = new CommandJTextField(50, commandSplitter) {
+					@Override
+					public void commandReceived(String cmd, String cmdBody) {
+						System.out.println(String.format("%s, %s", cmd, cmdBody));
+						CommandFinder finder = new CommandFinder();
+						CommandExecutor executor = finder.findCommand(cmd);
+						executor.execute(cmdBody);
+					}
+				};
 				frame.getContentPane().add(BorderLayout.EAST, textField);
 				frame.pack();
 				frame.setLocationRelativeTo(null); // center of screen

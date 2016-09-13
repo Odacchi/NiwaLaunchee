@@ -19,8 +19,9 @@ public class NiwaTaskTray extends TaskTray {
 
 	@Override
 	public TrayIcon generateTrayIcon() throws IOException {
+		System.out.println("loaded from icon: " + getClass().getClassLoader().getResources("").nextElement().toString());
 		Image image = ImageIO.read(
-				getClass().getClassLoader().getResourceAsStream("resources/icons/trayIcon.jpg"));
+				getClass().getClassLoader().getResourceAsStream("resources/Icon/trayIcon.jpg"));
 		TrayIcon icon = new TrayIcon(image);
 		icon.addActionListener(new ActionListener() {
 			@Override

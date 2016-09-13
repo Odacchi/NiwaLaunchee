@@ -25,6 +25,7 @@ public class NiwaSystem {
 	private SpecialKeyPressedObserver spKeyObserver;
 	private SpecialKeys specialKeys;
 	private WindowManager windowManager;
+	private String commandSplitter = " ";
 
 	public NiwaSystem() {
 
@@ -32,7 +33,7 @@ public class NiwaSystem {
 
 	public void init() throws IOException, AWTException {
 		windowManager = new WindowManager();
-		windowManager.setSearchWindow(new SearchWindow());
+		windowManager.setSearchWindow(new SearchWindow(commandSplitter));
 		windowManager.setTaskTray(new NiwaTaskTray());
 		setDefaultSpecialKeys();
 		spKeylistener = new SpecialKeyListener(specialKeys);
@@ -83,5 +84,13 @@ public class NiwaSystem {
 	public void keyListenStop() throws NativeHookException {
 		GlobalScreen.removeNativeKeyListener(spKeylistener);
 		GlobalScreen.unregisterNativeHook();
+	}
+
+	public String getCommandSplitter() {
+		return commandSplitter;
+	}
+
+	public void setCommandSplitter(String commandSplitter) {
+		this.commandSplitter = commandSplitter;
 	}
 }
