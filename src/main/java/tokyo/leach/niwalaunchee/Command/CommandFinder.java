@@ -17,6 +17,8 @@ public class CommandFinder {
 		if(executor.getCommand().contains(cmd)) {
 			return executor;
 		}
+		executor = new ShutdownCommandExecutor();
+		if(executor.getCommand().contains(cmd)) return executor;
 		return null;
 	}
 }

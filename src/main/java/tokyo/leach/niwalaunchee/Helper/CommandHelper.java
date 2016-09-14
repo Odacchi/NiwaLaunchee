@@ -27,4 +27,25 @@ public class CommandHelper {
 		}
 		return lr[1];
 	}
+
+	/**
+	 * return a shutdown command string
+	 * Refer: http://stackoverflow.com/questions/25637/shutting-down-a-computer
+	 * @param operatingSystem (please give the osname by System.getProperty("os.name")
+	 * @return
+	 */
+	public static String getShutdownCommandStr(String operatingSystem) {
+		String shutdownCommand;
+
+		if ("Linux".equals(operatingSystem) || "Mac OS X".equals(operatingSystem)) {
+			shutdownCommand = "shutdown -h now";
+		}
+		else if ("Windows".equals(operatingSystem)) {
+			shutdownCommand = "shutdown.exe -s -t 0";
+		}
+		else {
+			throw new RuntimeException("Unsupported operating system.");
+		}
+		return shutdownCommand;
+	}
 }
