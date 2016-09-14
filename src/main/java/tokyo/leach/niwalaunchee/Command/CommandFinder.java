@@ -8,6 +8,15 @@ import tokyo.leach.niwalaunchee.Util.BrowserUtil;
  */
 public class CommandFinder {
 	public CommandExecutor findCommand(String cmd) {
-		return new GoogleSearchCommandExecutor();
+		// FIXME tomi: separate command string array from CommandExecutor.
+		CommandExecutor executor = new GoogleSearchCommandExecutor();
+		if(executor.getCommand().contains(cmd)) {
+			return executor;
+		}
+		executor = new TwitterSearchCommandExecutor();
+		if(executor.getCommand().contains(cmd)) {
+			return executor;
+		}
+		return null;
 	}
 }

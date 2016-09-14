@@ -21,6 +21,7 @@ public class SearchWindow implements IToggleable {
 			@Override
 			public void run() {
 				frame = new JFrame("SearchWindow");
+				frame.setAlwaysOnTop(true);
 				frame.setLayout(new FlowLayout());
 				frame.setResizable(false);
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -30,7 +31,11 @@ public class SearchWindow implements IToggleable {
 						System.out.println(String.format("%s, %s", cmd, cmdBody));
 						CommandFinder finder = new CommandFinder();
 						CommandExecutor executor = finder.findCommand(cmd);
-						executor.execute(cmdBody);
+						if(executor != null) {
+							// before execute command, hide search window
+							frame.setVisible(false);
+							executor.execute(cmdBody);
+						}
 					}
 				};
 				frame.getContentPane().add(BorderLayout.EAST, textField);
