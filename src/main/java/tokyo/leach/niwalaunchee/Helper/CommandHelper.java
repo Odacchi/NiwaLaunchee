@@ -48,4 +48,8 @@ public class CommandHelper {
 		}
 		return shutdownCommand;
 	}
+
+	public static String getRebootCommandStr(String operatingSystem) {
+		return "shutdown -r";
+	}
 }
